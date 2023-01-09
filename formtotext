@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>文献抄録</title>
+  <script>
+    function save() {
+      // テキストエリアより文字列を取得
+      const txt1 = document.getElementById('txt1').value;
+      if (!txt1) { return; }
+
+      txt2 = document.getElementById('txt2').value;
+      if (!txt2) { return; }
+
+      txt3 = document.getElementById('txt3').value;
+      //if以下を外すと入力しなくてもDL可に
+      txt4 = document.getElementById('txt4').value;
+      if (!txt4) { return; }
+
+      txt5 = document.getElementById('txt5').value;
+      if (!txt5) { return; }
+
+      txt6 = document.getElementById('txt6').value;
+
+      // 文字列をBlob化
+      const blob = new Blob([`論文URL
+`, txt1,`
+
+タイトル等
+`, txt2,`
+
+雑誌名
+`, txt3,`
+
+日本語抄録
+`, txt4,`
+
+英文抄録
+`, txt5,`
+
+コメント
+`, txt6], { type: 'text/plain' });
+
+      // ダウンロード用のaタグ生成
+      const a = document.createElement('a');
+      a.href =  URL.createObjectURL(blob);
+
+//ダウンロードタイトルを最初の60文字で作成
+let sub;
+sub = txt2.substr(0, 60);
+
+      a.download = sub;
+      a.click();
+    };
+  </script>
+<style type="text/css"><!--
+.big { font-size:16pt; }
+--></style>
+</head>
+<body>
+論文URL*　　(*必須入力)<br>
+  <textarea id="txt1" cols="100" rows="1" class="big"></textarea>
+  <br />
+タイトル等*　タイトルを文頭にしてください（ファイル名になります）<br>
+  <textarea id="txt2" cols="100" rows="5" class="big"></textarea>
+  <br />
+雑誌名<br>
+  <textarea id="txt3" cols="100" rows="1" class="big"></textarea>
+  <br />
+日本語抄録*<br>
+  <textarea id="txt4" cols="100" rows="8" class="big"></textarea>
+  <br />
+英文抄録*<br>
+  <textarea id="txt5" cols="100" rows="3" class="big"></textarea>
+  <br />
+コメント<br>
+  <textarea id="txt6" cols="100" rows="1" class="big"></textarea>
+  <br />
+  <button onclick="save();">テキスト形式でダウンロード</button>
+<br>使い方
+ <br />1.論文URL：その論文のURL（論文タイトル・著者・abstract等が読めるページ）をコピペしてください。
+ <br />2.タイトル等：タイトル、著者、可能であれば雑誌名と年巻号、DOIなどをコピペしてください。タイトルが一番最初に来るようにしてください（ダウンロードファイル名になります）。
+ <br />3.雑誌名：雑誌名を入力してください。タイトル等に記載があれば入力不要です。
+ <br />4.日本語抄録：英文抄録を翻訳ソフト等にかけてコピペしてください（もちろん自力で日本語にしてもOK）
+ <br />5.英文抄録：翻訳ソフトの訳が分かりにくいときに原文を読むことができるように、英文抄録をコピペしてください。
+ <br />6.コメント：コメントがあれば入力してください。
+ <br />7.最後に「テキスト形式でダウンロード」ボタンを押すと、入力したデータがテキスト形式でダウンロードされます。ダウンロード先はあなたのパソコンのダウンロードフォルダ、もしくはブラウザで指定したフォルダです。
+ <br />
+8.ブラウザの再読み込みボタンを押すと入力した内容がクリアされます。
+ <br />2022.11 kg
+</body>
+</html>
